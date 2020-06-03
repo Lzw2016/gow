@@ -1,6 +1,8 @@
 # gow
 Go程序热编译工具，提升开发效率，支持Windows、Linux、Mac
 
+![gow](./screenshot/01.png)
+
 ### 特性
 - 支持Windows、Linux、Mac
 - 默认只监听.go文件，支持自定义监听文件配置
