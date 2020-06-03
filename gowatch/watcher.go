@@ -247,7 +247,7 @@ func (th *Watcher) goBuild() {
 }
 
 func (th *Watcher) restart() {
-	log.WithFields(logrus.Fields{"appName": th.outPut}).Info("重新启动目标程序")
+	log.WithFields(logrus.Fields{"appName": th.outPut}).Info("重启目标程序")
 	th.kill()
 	th.start()
 }
@@ -255,28 +255,27 @@ func (th *Watcher) restart() {
 func (th *Watcher) kill() {
 	defer func() {
 		if err := recover(); err != nil {
-			log.WithFields(logrus.Fields{}).Error("停止目标程序失败", err)
+			log.WithFields(logrus.Fields{}).Error("停止失败", err)
 		}
 	}()
 	if th.cmd != nil && th.cmd.Process != nil {
 		err := th.cmd.Process.Kill()
 		if err != nil {
-			log.WithFields(logrus.Fields{}).Error("停止目标程序失败", err)
+			log.WithFields(logrus.Fields{}).Error("停止失败", err)
 		} else {
-			log.WithFields(logrus.Fields{}).Info("停止目标程序成功")
+			log.WithFields(logrus.Fields{}).Info("停止成功")
 		}
 	}
 }
 
 func (th *Watcher) start() {
 	appName := th.outPut
-	log.WithFields(logrus.Fields{"appName": appName}).Info("启动目标程序...")
 	if !strings.HasPrefix(appName, "./") {
 		appName = "./" + appName
 	}
 	// ./app {Args}
 	th.cmd = exec.Command(appName)
-	th.cmd.Args = append([]string{appName}, th.config.Run.Args...)
+	th.cmd.Args = append([]string{}, th.config.Run.Args...)
 	th.cmd.Env = append(os.Environ(), th.config.Run.Envs...)
 	th.cmd.Stdout = os.Stdout
 	th.cmd.Stderr = os.Stderr
