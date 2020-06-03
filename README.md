@@ -14,10 +14,10 @@ Go程序热编译工具，提升开发效率，支持Windows、Linux、Mac
 
 ```shell script
 # 安装
-go get github.com/silenceper/gowatch
+go get github.com/Lzw2016/gow
 
 # 已安装更新
-go get -u github.com/silenceper/gowatch
+go get -u github.com/Lzw2016/gow
 
 # 使用
 gow -v
