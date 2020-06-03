@@ -128,7 +128,7 @@ func (th *Watcher) startWatch() {
 		}
 	}
 	log.Error("停止监听文件")
-	th.pathWatcher.Close()
+	_ = th.pathWatcher.Close()
 	os.Exit(2)
 }
 
@@ -281,7 +281,7 @@ func (th *Watcher) start() {
 	th.cmd.Stdout = os.Stdout
 	th.cmd.Stderr = os.Stderr
 	log.WithFields(logrus.Fields{"env": th.config.Run.Envs}).Info("启动: ", appName, " ", strings.Join(th.cmd.Args, " "))
-	err := th.cmd.Run()
+	err := th.cmd.Start()
 	if err != nil {
 		log.WithFields(logrus.Fields{"appName": appName, "args": th.cmd.Args, "env": th.config.Run.Envs}).Info("启动失败", err)
 	} else {

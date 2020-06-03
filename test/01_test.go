@@ -6,8 +6,10 @@ import (
 	"github.com/sirupsen/logrus"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
+	"syscall"
 	"testing"
 	"time"
 )
@@ -142,4 +144,20 @@ func Test0105(t *testing.T) {
 func Test0106(t *testing.T) {
 	r, _ := regexp.Compile("(\\w+).tmp$")
 	logrus.Println("MatchString = ", r.MatchString("D:\\SourceCode\\tmp\\go-test\\main\\main2.go"))
+}
+
+func Test0107(t *testing.T) {
+	var cmd *exec.Cmd
+	go func() {
+
+	}()
+	cmd = exec.Command("D:\\SourceCode\\tmp\\go-test\\app.exe")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	_ = cmd.Start()
+	time.Sleep(20 * time.Second)
+	err := cmd.Process.Signal(syscall.SIGKILL)
+	if err != nil {
+		log.Printf("%#v", err)
+	}
 }
