@@ -284,7 +284,8 @@ func (th *Watcher) start() {
 	if err != nil {
 		log.WithFields(logrus.Fields{"appName": appName, "args": th.cmd.Args, "env": th.config.Run.Envs}).Info("启动失败", err)
 	} else {
-		log.WithFields(logrus.Fields{"appName": appName}).Info("启动成功!")
+		log.WithFields(logrus.Fields{"appName": appName + "\n\n\n"}).Info("启动成功!")
+
 	}
 }
 

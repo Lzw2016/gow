@@ -2,7 +2,7 @@ package gowatch
 
 import (
 	"github.com/sirupsen/logrus"
-	logrusFormatter "github.com/x-cray/logrus-prefixed-formatter"
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 	"os"
 )
 
@@ -10,7 +10,7 @@ var log = logrus.New()
 
 func init() {
 	// log.SetFormatter(&logrus.TextFormatter{TimestampFormat: "2006-01-02 15:04:05.000", ForceQuote: true})
-	log.SetFormatter(&logrusFormatter.TextFormatter{TimestampFormat: "2006-01-02 15:04:05.000", FullTimestamp: true})
+	log.SetFormatter(&prefixed.TextFormatter{TimestampFormat: "2006-01-02 15:04:05.000", FullTimestamp: true})
 	log.SetOutput(os.Stdout)
 	log.SetLevel(logrus.DebugLevel)
 }
