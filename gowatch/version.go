@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const version = "v0.0.3"
+const version = "v0.0.4"
 
 // 打印当前版本
 func PrintVersion() {
